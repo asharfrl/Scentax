@@ -1,4 +1,5 @@
 'use client'
+import { products } from '@/data/products'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,22 +10,6 @@ import { TextGenerateEffect } from '@/app/components/ui/text-generate-effect'
 function OnlinePresence() {
   const ref = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-100px' })
-  const [onlinePresenceList, setOnlinePresenceList] = useState<any>(null)
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/api/page-data')
-        if (!res.ok) throw new Error('Failed to fetch')
-
-        const data = await res.json()
-        setOnlinePresenceList(data?.onlinePresenceList)
-      } catch (error) {
-        console.error('Error fetching services:', error)
-      }
-    }
-    fetchData()
-  }, [])
 
   const bottomAnimation = (index: number) => ({
     initial: { y: 50, opacity: 0 },
@@ -48,45 +33,43 @@ function OnlinePresence() {
               </h2>
             </div>
             <div className='grid md:grid-cols-2 gap-x-6 gap-y-8 w-full'>
-              {onlinePresenceList?.map((items: any, index: number) => (
+              {products.map((item, index) => (
                 <motion.div
-                  key={index}
+                  key={item.id}
                   className='group flex flex-col gap-6 cursor-pointer'
                   {...bottomAnimation(index)}
                 >
                   <div className='relative'>
-                    <Image
-                      src={items.image}
-                      alt={items.title}
-                      width={625}
-                      height={410}
-                      className='rounded-2xl'
-                    />
-                    <Link
-                      href={'/'}
-                      target='_blank'
-                      className='absolute top-0 left-0 bg-black/50 w-full h-full rounded-2xl hidden group-hover:flex'
-                    >
-                      <span className='flex justify-end p-5 w-full'>
-                        <Icon
-                          icon='icon-park-solid:circle-right-up'
-                          width='50'
-                          height='50'
-                          style={{ color: '#fbfbfb' }}
-                        />
-                      </span>
+                    <Link href={`/product/${item.slug}`} className="block">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        width={625}
+                        height={410}
+                        className='rounded-2xl w-full object-cover aspect-[4/3]'
+                      />
+                      <div className='absolute top-0 left-0 bg-black/50 w-full h-full rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
+                        <span className='flex justify-end p-5 w-full h-full items-start'>
+                          <Icon
+                            icon='icon-park-solid:circle-right-up'
+                            width='50'
+                            height='50'
+                            style={{ color: '#fbfbfb' }}
+                          />
+                        </span>
+                      </div>
                     </Link>
                   </div>
 
                   <div className='flex flex-col items-start gap-4'>
-                    <h3 className='group-hover:text-purple_blue text-2xl'>
-                      {items.title}
+                    <h3 className='group-hover:text-grey text-2xl font-medium'>
+                      {item.name}
                     </h3>
                     <div className='flex gap-3'>
-                      {items.tag?.map((tag: any, idx: number) => (
+                      {item.tags.map((tag, idx) => (
                         <p
                           key={idx}
-                          className='text-sm border border-dark_black/10 dark:border-white/50 w-fit py-1.5 px-4 rounded-full hover:bg-dark_black hover:text-white'
+                          className='text-sm border border-dark_black/10 dark:border-white/50 w-fit py-1.5 px-4 rounded-full hover:bg-dark_black hover:text-white transition-colors'
                         >
                           {tag}
                         </p>

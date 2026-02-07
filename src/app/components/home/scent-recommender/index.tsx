@@ -4,46 +4,31 @@ import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { TextGenerateEffect } from '@/app/components/ui/text-generate-effect'
 
+import { products, Product } from '@/data/products'
+import Link from 'next/link'
+
 type ResultType = 'NULL' | 'BOOLEAN' | 'OVERCLOCK' | 'KERNEL'
 
-interface ScentResult {
-    name: ResultType
-    description: string
-    image: string
-    tagline: string
+const getProduct = (slug: string): Product => {
+    const product = products.find(p => p.slug === slug)
+    if (!product) {
+        // Fallback or error handling if product is missing, though we expect it to exist
+        return products[0]
+    }
+    return product
 }
 
-const results: Record<ResultType, ScentResult> = {
-    NULL: {
-        name: 'NULL',
-        description: 'Aroma kosong yang penuh makna. Untuk Anda yang menyukai ketenangan total dan fokus tanpa gangguan.',
-        image: '/images/home/onlinePresence/prfm_1.jpg',
-        tagline: '// Clean Code. Zero Distraction.',
-    },
-    BOOLEAN: {
-        name: 'BOOLEAN',
-        description: 'Keseimbangan sempurna antara logika dan rasa. True or False, wanginya tetap valid.',
-        image: '/images/home/onlinePresence/prfm_2.jpg',
-        tagline: '// Balanced Logic. Harmonious Sync.',
-    },
-    OVERCLOCK: {
-        name: 'OVERCLOCK',
-        description: 'Performa tinggi untuk mengejar deadline. Aroma intens yang memacu adrenalin produktivitas.',
-        image: '/images/home/onlinePresence/prfm_3.jpg',
-        tagline: '// High Performance. Midnight Build.',
-    },
-    KERNEL: {
-        name: 'KERNEL',
-        description: 'Inti dari kestabilan sistem. Aroma klasik dan kuat yang menjadi fondasi kepercayaan diri.',
-        image: '/images/home/onlinePresence/prfm_4.jpg',
-        tagline: '// System Core. Premium Base.',
-    },
+const results: Record<ResultType, Product> = {
+    NULL: getProduct('null'),
+    BOOLEAN: getProduct('boolean'),
+    OVERCLOCK: getProduct('overclock'),
+    KERNEL: getProduct('kernel'),
 }
 
 export default function ScentRecommender() {
     const [step, setStep] = useState(0)
     const [environment, setEnvironment] = useState<'light' | 'dark' | null>(null)
-    const [result, setResult] = useState<ScentResult | null>(null)
+    const [result, setResult] = useState<Product | null>(null)
 
     const resetQuiz = () => {
         setStep(0)
@@ -195,9 +180,9 @@ export default function ScentRecommender() {
                             </div>
 
                             <div className='w-full md:w-1/2 text-left space-y-5'>
-                                <div className='inline-block px-4 py-1.5 bg-white/10 rounded-full text-xs font-medium text-white/80 border border-white/5'>
+                                {/* <div className='inline-block px-4 py-1.5 bg-white/10 rounded-full text-xs font-medium text-white/80 border border-white/5'>
                                     Detection Complete
-                                </div>
+                                </div> */}
                                 <div>
                                     <h3 className='text-4xl font-medium text-white mb-2'>
                                         {result.name}
@@ -218,7 +203,10 @@ export default function ScentRecommender() {
                                 </div>
 
                                 <div className='flex gap-4 pt-2 items-center'>
-                                    <button className='group gap-2 text-dark_black font-medium bg-white rounded-full flex items-center justify-between py-3 pl-6 pr-2 hover:opacity-90 transition-all duration-200'>
+                                    <Link
+                                        href={`/product/${result.slug}`}
+                                        className='group gap-2 text-dark_black font-medium bg-white rounded-full flex items-center justify-between py-3 pl-6 pr-2 hover:opacity-90 transition-all duration-200'
+                                    >
                                         <span className='group-hover:translate-x-1 transform transition-transform duration-200'>
                                             Beli Sekarang
                                         </span>
@@ -228,7 +216,7 @@ export default function ScentRecommender() {
                                                 <polyline points="12 5 19 12 12 19"></polyline>
                                             </svg>
                                         </div>
-                                    </button>
+                                    </Link>
 
                                     <button
                                         onClick={resetQuiz}

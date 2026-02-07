@@ -21,55 +21,20 @@ function Innovation() {
       <div ref={ref} className='2xl:py-20 py-11'>
         <div className='container'>
           <div className='flex flex-col gap-12'>
-            {/* <div className='flex flex-col justify-center items-center gap-10 lg:gap-16'>
+            <div className='flex flex-col justify-center items-center gap-10 lg:gap-16'>
               <motion.div
                 {...bottomAnimation(1)}
                 className='max-w-(--breakpoint-Xsm) text-center'>
                 <h2>
-                  <TextGenerateEffect words="Where innovation meets" delay={0.4} />
+                  <TextGenerateEffect words="Program Aroma Anda Sendiri" delay={0.4} />
                   <TextGenerateEffect
-                    words="aesthetics"
+                    words="Scent Recommender"
                     delay={1}
                     className="italic font-normal instrument-font"
                   />
                 </h2>
               </motion.div>
-              <div ref={ref} className='w-full'>
-                <div
-                  className='grid auto-rows-max grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-6 w-full'>
-                  {innovationList?.map((items: any, index: any) => {
-                    return (
-                      <motion.div
-                        key={index}
-                        className={`${items.bg_color} flex flex-col p-8 rounded-2xl gap-6 lg:gap-9`}
-                        initial={{ scale: 1.2, opacity: 0, filter: 'blur(8px)' }}
-                        animate={inView ? { scale: 1, opacity: 1, filter: 'blur(0px)' } : {}}
-                        transition={{ duration: 0.6, delay: 0.3 + index * 0.2, ease: 'easeInOut' }}
-                      >
-                        <div>
-                          <Image
-                            src={items.image}
-                            alt='image'
-                            height={40}
-                            width={40}
-                          />
-                        </div>
-                        <div>
-                          <h3 className={`text-2xl ${items.txt_color}`}>
-                            {items.title.split('\n')?.map((line: any, i: number) => (
-                              <React.Fragment key={i}>
-                                {line}
-                                <br />
-                              </React.Fragment>
-                            ))}
-                          </h3>
-                        </div>
-                      </motion.div>
-                    )
-                  })}
-                </div>
-              </div>
-            </div> */}
+            </div>
             <div
               className='flex flex-col gap-4 xl:flex xl:flex-row bg-dark_black items-center justify-between dark:bg-white/5 py-8 px-7 sm:px-12 rounded-3xl w-full min-h-[400px] transition-all duration-500'>
 
@@ -94,9 +59,6 @@ function Innovation() {
                     menemukan wangi yang paling sinkron dengan kepribadian Anda.
                     <br />
                     <br />
-                    Program Aroma Anda Sendiri!
-                    <br />
-                    <br />
                     Bebas Bug, Hanya Aroma Murni
                   </h4>
                   <div className='flex flex-col sm:flex-row gap-3 items-center'>
@@ -107,7 +69,7 @@ function Innovation() {
                         Temukan Aromamu
                       </span>
                       <svg
-                        width='32'
+                        width='50'
                         height='32'
                         viewBox='0 0 32 32'
                         fill='none'
