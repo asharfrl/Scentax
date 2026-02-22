@@ -13,6 +13,7 @@ export interface Product {
         baseNotes: string;
         longevity: string;
     }
+    isComingSoon?: boolean;
 }
 
 export const products: Product[] = [
@@ -22,9 +23,10 @@ export const products: Product[] = [
         name: 'NULL',
         tagline: '// Clean Code. Zero Distraction.',
         description: 'Aroma kosong yang penuh makna. Untuk Anda yang menyukai ketenangan total dan fokus tanpa gangguan. Diformulasikan untuk programmer yang membutuhkan "ruang kosong" dalam pikiran mereka.',
-        price: 299000,
-        image: '/images/home/onlinePresence/prfm_1.jpg',
+        price: 65000,
+        image: '/images/home/onlinePresence/prdct_1-2.png',
         tags: ['Clean Code', 'Deep Work'],
+        isComingSoon: true,
         details: {
             topNotes: 'Clean Air, White Tea',
             middleNotes: 'Cotton Flower, Transparent Musk',
@@ -38,9 +40,10 @@ export const products: Product[] = [
         name: 'BOOLEAN',
         tagline: '// Balanced Logic. Harmonious Sync.',
         description: 'Keseimbangan sempurna antara logika dan rasa. True or False, wanginya tetap valid. Cocok untuk mereka yang menjalani hidup dengan prinsip biner namun tetap fleksibel.',
-        price: 329000,
-        image: '/images/home/onlinePresence/prfm_2.jpg',
+        price: 65000,
+        image: '/images/home/onlinePresence/prdct_2-2.png',
         tags: ['Balanced Logic', 'Universal'],
+        isComingSoon: true,
         details: {
             topNotes: 'Bergamot, Black Pepper',
             middleNotes: 'Lavender, Sage',
@@ -54,9 +57,10 @@ export const products: Product[] = [
         name: 'OVERCLOCK',
         tagline: '// High Performance. Midnight Build.',
         description: 'Performa tinggi untuk mengejar deadline. Aroma intens yang memacu adrenalin produktivitas. Teman setia saat lembur dan mengejar target yang mustahil.',
-        price: 349000,
-        image: '/images/home/onlinePresence/prfm_3.jpg',
+        price: 65000,
+        image: '/images/home/onlinePresence/prdct_3-2.png',
         tags: ['High Performance', 'Midnight Build'],
+        isComingSoon: true,
         details: {
             topNotes: 'Espresso, Red Apple',
             middleNotes: 'Leather, Tobacco',
@@ -70,9 +74,10 @@ export const products: Product[] = [
         name: 'KERNEL',
         tagline: '// System Core. Premium Base.',
         description: 'Inti dari kestabilan sistem. Aroma klasik dan kuat yang menjadi fondasi kepercayaan diri. Wewangian yang memancarkan otoritas dan ketenangan.',
-        price: 399000,
-        image: '/images/home/onlinePresence/prfm_4.jpg',
+        price: 65000,
+        image: '/images/home/onlinePresence/prdct_4-2.png',
         tags: ['System Core', 'Premium Base'],
+        isComingSoon: true,
         details: {
             topNotes: 'Sandalwood, Cardamom',
             middleNotes: 'Violet, Papyrus',

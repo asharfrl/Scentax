@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import { TextGenerateEffect } from '@/app/components/ui/text-generate-effect'
+import { Icon } from '@iconify/react/dist/iconify.js'
 
 import { products, Product } from '@/data/products'
 import Link from 'next/link'
@@ -29,6 +30,12 @@ export default function ScentRecommender() {
     const [step, setStep] = useState(0)
     const [environment, setEnvironment] = useState<'light' | 'dark' | null>(null)
     const [result, setResult] = useState<Product | null>(null)
+    const [showComingSoon, setShowComingSoon] = useState(false)
+
+    const handleComingSoon = () => {
+        setShowComingSoon(true)
+        setTimeout(() => setShowComingSoon(false), 2000)
+    }
 
     const resetQuiz = () => {
         setStep(0)
@@ -171,12 +178,23 @@ export default function ScentRecommender() {
                             <div className='w-full md:w-1/2 relative aspect-square max-w-[280px]'>
                                 <div className='absolute inset-0 bg-white/10 rounded-3xl transform rotate-6'></div>
                                 <div className='absolute inset-0 bg-white/5 rounded-3xl transform -rotate-3'></div>
-                                <Image
-                                    src={result.image}
-                                    alt={result.name}
-                                    fill
-                                    className='object-cover rounded-3xl relative z-10 shadow-2xl'
-                                />
+                                <div className='relative w-full h-full rounded-3xl overflow-hidden z-10 shadow-2xl'>
+                                    <Image
+                                        src={result.image}
+                                        alt={result.name}
+                                        fill
+                                        className={`object-cover transition-all duration-700 ${result.isComingSoon ? 'blur-xl scale-110' : ''}`}
+                                    />
+                                    {result.isComingSoon && (
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/20 text-white p-4 text-center">
+                                            <Icon icon="mdi:eye-off-outline" className="text-4xl mb-2 opacity-90" />
+                                            <h3 className="text-xl font-bold tracking-tighter mb-1 leading-none">COMING SOON</h3>
+                                            <p className="text-[10px] font-medium leading-tight max-w-[140px] opacity-80">
+                                                this picture holds something that could spark your excitement
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
 
                             <div className='w-full md:w-1/2 text-left space-y-5'>
@@ -202,21 +220,35 @@ export default function ScentRecommender() {
                                     </p>
                                 </div>
 
-                                <div className='flex gap-4 pt-2 items-center'>
-                                    <Link
-                                        href={`/product/${result.slug}`}
-                                        className='group gap-2 text-dark_black font-medium bg-white rounded-full flex items-center justify-between py-3 pl-6 pr-2 hover:opacity-90 transition-all duration-200'
-                                    >
-                                        <span className='group-hover:translate-x-1 transform transition-transform duration-200'>
-                                            Beli Sekarang
-                                        </span>
-                                        <div className='bg-dark_black rounded-full p-2 ml-4'>
-                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-rotate-45 transition-transform duration-200">
-                                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                <polyline points="12 5 19 12 12 19"></polyline>
-                                            </svg>
-                                        </div>
-                                    </Link>
+                                <div className='flex gap-4 pt-2 items-center relative'>
+                                    {result.isComingSoon ? (
+                                        <button
+                                            onClick={handleComingSoon}
+                                            className='group gap-1 text-dark_black font-medium bg-white/50 rounded-full flex items-center justify-between py-3 pl-6 pr-2 transition-all duration-200 cursor-pointer overflow-hidden relative'
+                                        >
+                                            <span className='group-hover:translate-x-1 transform transition-transform duration-200'>
+                                                Beli Sekarang
+                                            </span>
+                                            <div className='bg-dark_black/30 rounded-full p-2 ml-4'>
+                                                <Icon icon="mdi:clock-outline" className="text-lg text-white" />
+                                            </div>
+                                        </button>
+                                    ) : (
+                                        <Link
+                                            href={`/product/${result.slug}`}
+                                            className='group gap-2 text-dark_black font-medium bg-white rounded-full flex items-center justify-between py-3 pl-6 pr-2 hover:opacity-90 transition-all duration-200'
+                                        >
+                                            <span className='group-hover:translate-x-1 transform transition-transform duration-200'>
+                                                Beli Sekarang
+                                            </span>
+                                            <div className='bg-dark_black rounded-full p-2 ml-4'>
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-rotate-45 transition-transform duration-200">
+                                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                                </svg>
+                                            </div>
+                                        </Link>
+                                    )}
 
                                     <button
                                         onClick={resetQuiz}
@@ -229,6 +261,19 @@ export default function ScentRecommender() {
                                             <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
                                         </svg>
                                     </button>
+
+                                    <AnimatePresence>
+                                        {showComingSoon && (
+                                            <motion.div
+                                                initial={{ opacity: 0, scale: 0.8 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                exit={{ opacity: 0, scale: 0.8 }}
+                                                className="absolute -top-10 left-0 bg-white text-dark_black px-4 py-1.5 rounded-full text-[10px] font-bold shadow-xl whitespace-nowrap z-50 border border-black/5"
+                                            >
+                                                🚀 Segera Hadir!
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
                                 </div>
                             </div>
                         </motion.div>

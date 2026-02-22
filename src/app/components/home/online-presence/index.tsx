@@ -46,17 +46,24 @@ function OnlinePresence() {
                         alt={item.name}
                         width={625}
                         height={410}
-                        className='rounded-2xl w-full object-cover aspect-[4/3]'
+                        className={`rounded-2xl w-full object-cover aspect-[4/3] transition-all duration-500 ${item.isComingSoon ? 'blur-md group-hover:blur-lg' : ''}`}
                       />
-                      <div className='absolute top-0 left-0 bg-black/50 w-full h-full rounded-2xl flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300'>
-                        <span className='flex justify-end p-5 w-full h-full items-start'>
-                          <Icon
-                            icon='icon-park-solid:circle-right-up'
-                            width='50'
-                            height='50'
-                            style={{ color: '#fbfbfb' }}
-                          />
-                        </span>
+                      <div className={`absolute top-0 left-0 w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 ${item.isComingSoon ? 'bg-black/30' : 'bg-black/50 opacity-0 group-hover:opacity-100'}`}>
+                        {item.isComingSoon ? (
+                          <div className="flex flex-col items-center text-white p-4 text-center">
+                            <Icon icon="mdi:eye-off-outline" className="text-4xl mb-2" />
+                            <span className="text-xl font-bold tracking-widest">COMING SOON</span>
+                          </div>
+                        ) : (
+                          <span className='flex justify-end p-5 w-full h-full items-start'>
+                            <Icon
+                              icon='icon-park-solid:circle-right-up'
+                              width='50'
+                              height='50'
+                              style={{ color: '#fbfbfb' }}
+                            />
+                          </span>
+                        )}
                       </div>
                     </Link>
                   </div>

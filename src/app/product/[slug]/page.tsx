@@ -5,8 +5,9 @@ import { Icon } from '@iconify/react/dist/iconify.js'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound, useParams, useRouter } from 'next/navigation'
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import { TextGenerateEffect } from '@/app/components/ui/text-generate-effect'
+import { useState } from 'react'
 
 export default function ProductPage() {
     const params = useParams()
@@ -14,6 +15,12 @@ export default function ProductPage() {
     const product = products.find((p) => p.slug === slug)
 
     const router = useRouter()
+    const [showComingSoon, setShowComingSoon] = useState(false)
+
+    const handleComingSoon = () => {
+        setShowComingSoon(true)
+        setTimeout(() => setShowComingSoon(false), 2000)
+    }
 
     if (!product) {
         return notFound()
@@ -39,9 +46,18 @@ export default function ProductPage() {
                                         src={product.image}
                                         alt={product.name}
                                         fill
-                                        className="object-cover hover:scale-105 transition-transform duration-700"
+                                        className={`object-cover transition-all duration-700 ${product.isComingSoon ? 'blur-xl scale-110' : 'hover:scale-105'}`}
                                         priority
                                     />
+                                    {product.isComingSoon && (
+                                        <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/20 text-white p-6 text-center">
+                                            <Icon icon="mdi:eye-off-outline" className="text-6xl mb-4 opacity-90" />
+                                            <h3 className="text-3xl font-bold tracking-tighter mb-2">COMING SOON</h3>
+                                            <p className="text-sm font-medium leading-tight max-w-[200px] opacity-80">
+                                                this picture holds something that could spark your excitement
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
 
@@ -97,28 +113,59 @@ export default function ProductPage() {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-12 pt-4">
+                            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-12 pt-4 relative">
                                 <div>
                                     <span className="text-sm text-dark_black/50 dark:text-white/50 block mb-1 font-medium">Price</span>
-                                    <span className="text-4xl font-medium instrument-font italic block">
-                                        Rp {product.price.toLocaleString('id-ID')}
+                                    <span className="text-4xl font-medium instrument-font italic block min-w-[150px]">
+                                        {product.isComingSoon ? (
+                                            <span className="text-dark_black/40 dark:text-white/40">Coming Soon</span>
+                                        ) : (
+                                            `Rp ${product.price.toLocaleString('id-ID')}`
+                                        )}
                                     </span>
                                 </div>
 
-                                <Link
-                                    href={`/checkout?product=${product.slug}`}
-                                    className='group flex-1 w-full sm:w-auto min-w-[240px] text-white dark:text-dark_black font-medium bg-dark_black dark:bg-white rounded-full flex items-center justify-between py-3 pl-8 pr-3 hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl'
-                                >
-                                    <span className='group-hover:translate-x-2 transform transition-transform duration-300'>
-                                        Beli Sekarang
-                                    </span>
-                                    <div className='bg-white dark:bg-dark_black rounded-full p-2.5 ml-4 shadow-sm'>
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-rotate-45 transition-transform duration-300 text-dark_black dark:text-white">
-                                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                                            <polyline points="12 5 19 12 12 19"></polyline>
-                                        </svg>
-                                    </div>
-                                </Link>
+                                {product.isComingSoon ? (
+                                    <button
+                                        onClick={handleComingSoon}
+                                        className='group flex-1 w-full sm:w-auto min-w-[240px] text-white dark:text-dark_black font-medium bg-dark_black/50 dark:bg-white/50 rounded-full flex items-center justify-between py-3 pl-8 pr-3 transition-all duration-300 shadow-lg cursor-pointer overflow-hidden relative'
+                                    >
+                                        <span className='group-hover:translate-x-2 transform transition-transform duration-300'>
+                                            Beli Sekarang
+                                        </span>
+                                        <div className='bg-white/30 dark:bg-dark_black/30 rounded-full p-2.5 ml-4'>
+                                            <Icon icon="mdi:clock-outline" className="text-xl" />
+                                        </div>
+                                    </button>
+                                ) : (
+                                    <Link
+                                        href={`/checkout?product=${product.slug}`}
+                                        className='group flex-1 w-full sm:w-auto min-w-[240px] text-white dark:text-dark_black font-medium bg-dark_black dark:bg-white rounded-full flex items-center justify-between py-3 pl-8 pr-3 hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl'
+                                    >
+                                        <span className='group-hover:translate-x-2 transform transition-transform duration-300'>
+                                            Beli Sekarang
+                                        </span>
+                                        <div className='bg-white dark:bg-dark_black rounded-full p-2.5 ml-4 shadow-sm'>
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-rotate-45 transition-transform duration-300 text-dark_black dark:text-white">
+                                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                <polyline points="12 5 19 12 12 19"></polyline>
+                                            </svg>
+                                        </div>
+                                    </Link>
+                                )}
+
+                                <AnimatePresence>
+                                    {showComingSoon && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            exit={{ opacity: 0, y: 10 }}
+                                            className="absolute -top-12 right-0 left-0 sm:left-auto bg-dark_black dark:bg-white text-white dark:text-dark_black px-6 py-2 rounded-full text-sm font-medium shadow-xl text-center z-50 border border-white/10"
+                                        >
+                                            🚀 Segera Hadir di Koleksi Kami!
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
 
                             <button
