@@ -11,10 +11,6 @@ import Solutions from "./components/home/solution";
 import Subscription from "./components/home/subscription";
 import WebResult from "./components/home/web-result";
 
-export const metadata: Metadata = {
-  title: "SCENTAX",
-};
-
 
 export default function Home() {
   return (

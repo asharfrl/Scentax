@@ -181,7 +181,7 @@ export default function ProductPage() {
                     </div>
 
                     {/* Other Products Section */}
-                    <div className="mt-12 md:mt-20 border-t border-dark_black/10 dark:border-white/10 pt-12">
+                    {/* <div className="mt-12 md:mt-20 border-t border-dark_black/10 dark:border-white/10 pt-12">
                         <h3 className="text-3xl font-medium text-dark_black dark:text-white mb-8 text-center instrument-font italic">
                             Koleksi Lainnya
                         </h3>
@@ -230,7 +230,7 @@ export default function ProductPage() {
                                 </Link>
                             ))}
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </section>

@@ -19,7 +19,7 @@ const mobileHeaderData = [
 const footerData = {
     brand: {
         name: "SCENTAX",
-        tagline: "The Syntax of Scent Precision in Every Note",
+        tagline: "Your Signature Scent Starts Here",
         socialLinks: [
             // {
             //     icon: "/images/home/footerSocialIcon/twitter.svg",
@@ -39,7 +39,7 @@ const footerData = {
             {
                 icon: "/images/home/footerSocialIcon/instagram.svg",
                 dark_icon: "/images/home/footerSocialIcon/instagram_dark.svg",
-                link: "https://instagram.com"
+                link: "https://www.instagram.com/scentax_perfume/"
             }
         ]
     },
@@ -64,7 +64,7 @@ const footerData = {
     // },
     contactDetails: {
         name: "Detail Kontak",
-        address: "Jl. Cakrawala No.5, Sumbersari, Kec. Lowokwaru, Kota Malang, Jawa Timur 6514581",
+        address: "Jl. Cakrawala No.5, Sumbersari, Kec. Lowokwaru, Kota Malang, Jawa Timur 65145",
         email: "muhammad.ashar.240533@students.um.ac.id",
         phone: "+62 899 4635 579"
     },

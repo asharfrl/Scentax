@@ -39,14 +39,14 @@ function OnlinePresence() {
                   className='group flex flex-col gap-6 cursor-pointer'
                   {...bottomAnimation(index)}
                 >
-                  <div className='relative'>
+                  <div className='relative rounded-2xl overflow-hidden'>
                     <Link href={`/product/${item.slug}`} className="block">
                       <Image
                         src={item.image}
                         alt={item.name}
                         width={625}
                         height={410}
-                        className={`rounded-2xl w-full object-cover aspect-[4/3] transition-all duration-500 ${item.isComingSoon ? 'blur-md group-hover:blur-lg' : ''}`}
+                        className={`w-full object-cover aspect-[4/3] transition-all duration-500 rounded-2xl ${item.isComingSoon ? 'blur-md scale-105 group-hover:blur-lg' : ''}`}
                       />
                       <div className={`absolute top-0 left-0 w-full h-full rounded-2xl flex items-center justify-center transition-all duration-300 ${item.isComingSoon ? 'bg-black/30' : 'bg-black/50 opacity-0 group-hover:opacity-100'}`}>
                         {item.isComingSoon ? (
