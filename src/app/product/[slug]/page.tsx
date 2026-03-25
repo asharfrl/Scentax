@@ -138,20 +138,31 @@ export default function ProductPage() {
                                         </div>
                                     </button>
                                 ) : (
-                                    <Link
-                                        href={`/checkout?product=${product.slug}`}
-                                        className='group flex-1 w-full sm:w-auto min-w-[240px] text-white dark:text-dark_black font-medium bg-dark_black dark:bg-white rounded-full flex items-center justify-between py-3 pl-8 pr-3 hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl'
-                                    >
-                                        <span className='group-hover:translate-x-2 transform transition-transform duration-300'>
-                                            Beli Sekarang
-                                        </span>
-                                        <div className='bg-white dark:bg-dark_black rounded-full p-2.5 ml-4 shadow-sm'>
-                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-rotate-45 transition-transform duration-300 text-dark_black dark:text-white">
-                                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                                <polyline points="12 5 19 12 12 19"></polyline>
-                                            </svg>
-                                        </div>
-                                    </Link>
+                                    <div className="flex gap-4 w-full sm:w-auto">
+                                        <Link
+                                            href={`/checkout?product=${product.slug}`}
+                                            className='group flex-1 w-full sm:w-auto min-w-[200px] xl:min-w-[240px] text-white dark:text-dark_black font-medium bg-dark_black dark:bg-white rounded-full flex items-center justify-between py-3 pl-8 pr-3 hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl'
+                                        >
+                                            <span className='group-hover:translate-x-2 transform transition-transform duration-300'>
+                                                Beli Sekarang
+                                            </span>
+                                            <div className='bg-white dark:bg-dark_black rounded-full p-2.5 ml-4 shadow-sm'>
+                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-rotate-45 transition-transform duration-300 text-dark_black dark:text-white">
+                                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                                </svg>
+                                            </div>
+                                        </Link>
+                                        <Link
+                                            href="https://shopee.co.id/product/206197133/45206980554?gads_t_sig=VTJGc2RHVmtYMTlxTFVSVVRrdENkU2JFTVEwRERXdk0raE8zenp3RHFhazlHU0svNGlDYjJVSkFmVHRKRXZWRGtnRnVldHljRDFTbTNORjRTK1lUTjdJM3dNU2lRcVpTbEt3a2hRdGM1ZkhubmJGbDk2ZUpsT2xhRVlPYTZFd1lXSmJMUklpQzE2WlJtbnhHaGVWZXNiaFVTZ2ZhZk9Nem9rR0didGszRUx1THBGZEFMbVpWbTR1L1MzK3ZNYW8z&mmp_pid=an_11303840541&uls_trackid=5585u0ji00o5&utm_campaign=id_LyklJNwTyZ&utm_content=----&utm_medium=affiliates&utm_source=an_11303840541&utm_term=enhfbb1iwe71"
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="flex items-center justify-center aspect-square px-4 rounded-full bg-[#ee4d2d] hover:opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl"
+                                            aria-label="Beli di Shopee"
+                                        >
+                                            <Icon icon="simple-icons:shopee" className="text-white text-2xl" />
+                                        </Link>
+                                    </div>
                                 )}
 
                                 <AnimatePresence>

@@ -126,13 +126,13 @@ function CheckoutForm() {
                             <span>Rp 5.000</span>
                         </div>
                         <div className="flex justify-between text-dark_black/60 dark:text-white/60 border-b border-dark_black/10 dark:border-white/10 pb-6">
-                            <span>Pajak (11%)</span>
-                            <span>Rp {(product.price * 0.11).toLocaleString('id-ID')}</span>
+                            <span>Pajak (10%)</span>
+                            <span>Rp {(product.price * 0.10).toLocaleString('id-ID')}</span>
                         </div>
                         <div className="flex justify-between items-center pt-2">
                             <span className="text-lg font-medium text-dark_black dark:text-white">Total Pembayaran</span>
                             <span className="text-2xl font-medium text-dark_black dark:text-white instrument-font italic">
-                                Rp {(product.price * 1.11 + 5000).toLocaleString('id-ID')}
+                                Rp {(product.price * 1.10 + 5000).toLocaleString('id-ID')}
                             </span>
                         </div>
                     </div>
@@ -210,12 +210,42 @@ function CheckoutForm() {
                         </div>
                     )}
                 </div>
+
+                {/* Mobile action buttons (below payment method) */}
+                <div className="flex lg:hidden flex-col gap-4 pt-4 pb-8">
+                    <button
+                        type="submit"
+                        form="checkoutForm"
+                        disabled={isSubmitting}
+                        className='group w-full text-white dark:text-dark_black font-medium bg-dark_black dark:bg-white rounded-full flex items-center justify-between py-3 pl-6 pr-3 transition-all duration-200 ease-in-out hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed'>
+                        <span className='transform transition-transform duration-200 ease-in-out group-hover:translate-x-2'>
+                            {isSubmitting ? 'Memproses...' : paymentMethod === 'midtrans' ? 'Bayar dengan Midtrans' : 'Konfirmasi Pembayaran'}
+                        </span>
+                        <div className='bg-white dark:bg-dark_black rounded-full p-2.5'>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-dark_black dark:text-white transform group-hover:-rotate-45 transition-transform duration-200">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </div>
+                    </button>
+
+                    <button
+                        type="button"
+                        onClick={() => router.back()}
+                        className="w-full text-dark_black dark:text-white font-medium bg-transparent border border-dark_black/10 dark:border-white/10 rounded-full flex items-center justify-center gap-3 py-3 hover:bg-dark_black/5 dark:hover:bg-white/5 transition-all duration-200 group"
+                    >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-translate-x-1 transition-transform">
+                            <path d="M19 12H5m7 7l-7-7 7-7" />
+                        </svg>
+                        <span>Batal & Kembali</span>
+                    </button>
+                </div>
             </div>
 
             {/* Customer Details Form */}
             <div className="bg-white dark:bg-dark_black border border-dark_black/10 dark:border-white/10 rounded-3xl p-6 md:p-8 shadow-sm order-1 lg:order-2">
                 <h2 className="text-2xl font-medium text-dark_black dark:text-white mb-8">Data Pengiriman</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+                <form id="checkoutForm" onSubmit={handleSubmit} className="flex flex-col gap-6">
                     <div className="w-full">
                         <label htmlFor="name" className="text-dark_black dark:text-white mb-2 block">Nama Lengkap</label>
                         <input
@@ -272,9 +302,11 @@ function CheckoutForm() {
                         />
                     </div>
 
-                    <div className="pt-4">
+                    {/* Desktop action buttons */}
+                    <div className="hidden lg:flex flex-col gap-4 pt-4">
                         <button
                             type="submit"
+                            form="checkoutForm"
                             disabled={isSubmitting}
                             className='group w-full text-white dark:text-dark_black font-medium bg-dark_black dark:bg-white rounded-full flex items-center justify-between py-3 pl-6 pr-3 transition-all duration-200 ease-in-out hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed'>
                             <span className='transform transition-transform duration-200 ease-in-out group-hover:translate-x-2'>
@@ -287,18 +319,18 @@ function CheckoutForm() {
                                 </svg>
                             </div>
                         </button>
-                    </div>
 
-                    <button
-                        type="button"
-                        onClick={() => router.back()}
-                        className="w-full text-dark_black dark:text-white font-medium bg-transparent border border-dark_black/10 dark:border-white/10 rounded-full flex items-center justify-center gap-3 py-3 hover:bg-dark_black/5 dark:hover:bg-white/5 transition-all duration-200 group"
-                    >
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-translate-x-1 transition-transform">
-                            <path d="M19 12H5m7 7l-7-7 7-7" />
-                        </svg>
-                        <span>Batal & Kembali</span>
-                    </button>
+                        <button
+                            type="button"
+                            onClick={() => router.back()}
+                            className="w-full text-dark_black dark:text-white font-medium bg-transparent border border-dark_black/10 dark:border-white/10 rounded-full flex items-center justify-center gap-3 py-3 hover:bg-dark_black/5 dark:hover:bg-white/5 transition-all duration-200 group"
+                        >
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transform group-hover:-translate-x-1 transition-transform">
+                                <path d="M19 12H5m7 7l-7-7 7-7" />
+                            </svg>
+                            <span>Batal & Kembali</span>
+                        </button>
+                    </div>
 
                 </form>
             </div >

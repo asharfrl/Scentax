@@ -97,14 +97,14 @@ function HeroSection() {
 
                 <div className='flex items-center gap-7'>
                   {/* -------------- Star rating division --------------- */}
-                  <div className='gap-1 flex flex-col items-center text-center'>
+                  {/* <div className='gap-1 flex flex-col items-center text-center'>
                     <div>
                       <StarRating count={5} color='#F59E0B' />
                     </div>
                     <p className='text-sm font-normal text-dark_black/60 dark:text-white/60'>
                       Dipercaya oleh 1000+ klien
                     </p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </motion.div>

@@ -32,7 +32,7 @@ function OnlinePresence() {
                 />
               </h2>
             </div>
-            <div className='grid md:grid-cols-2 gap-x-6 gap-y-8 w-full'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-8 w-full'>
               {products.map((item, index) => (
                 <motion.div
                   key={item.id}

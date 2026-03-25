@@ -19,18 +19,18 @@ export interface Product {
 export const products: Product[] = [
     {
         id: '1',
-        slug: 'null',
-        name: 'NULL',
-        tagline: '// Clean Code. Zero Distraction.',
-        description: 'Aroma kosong yang penuh makna. Untuk Anda yang menyukai ketenangan total dan fokus tanpa gangguan. Diformulasikan untuk programmer yang membutuhkan "ruang kosong" dalam pikiran mereka.',
-        price: 65000,
-        image: '/images/home/onlinePresence/prdct_1-2.png',
-        tags: ['Clean Code', 'Deep Work'],
-        isComingSoon: true,
+        slug: 'algorithm',
+        name: 'ALGORITHM',
+        tagline: '// Pure. Logical. Fragrant.',
+        description: 'Algorithm bukan sekadar wewangian, melainkan sebuah formula presisi bagi Anda yang menghargai struktur dan kejelasan. Terinspirasi dari logika pemrograman yang bersih, varian ini dirancang untuk memberikan kesan profesional, cerdas, dan sophisticated. Sama seperti baris kode yang dieksekusi dengan sempurna, Algorithm hadir dengan perpaduan aroma yang seimbang, namun meninggalkan impresi yang kuat dan bertahan lama.',
+        price: 55000,
+        image: '/images/home/onlinePresence/prdct_1.jpg',
+        tags: ['Citrus', 'Segar', 'Woody'],
+        isComingSoon: false,
         details: {
-            topNotes: 'Clean Air, White Tea',
-            middleNotes: 'Cotton Flower, Transparent Musk',
-            baseNotes: 'Iso E Super, Ambrette Seeds',
+            topNotes: 'Segar & Clean',
+            middleNotes: 'Floral / Spicy ringan',
+            baseNotes: 'Woody / Musky',
             longevity: '6-8 Jam'
         }
     },
@@ -68,21 +68,4 @@ export const products: Product[] = [
             longevity: '8-10 Jam'
         }
     },
-    {
-        id: '4',
-        slug: 'kernel',
-        name: 'KERNEL',
-        tagline: '// System Core. Premium Base.',
-        description: 'Inti dari kestabilan sistem. Aroma klasik dan kuat yang menjadi fondasi kepercayaan diri. Wewangian yang memancarkan otoritas dan ketenangan.',
-        price: 65000,
-        image: '/images/home/onlinePresence/prdct_4-2.png',
-        tags: ['System Core', 'Premium Base'],
-        isComingSoon: true,
-        details: {
-            topNotes: 'Sandalwood, Cardamom',
-            middleNotes: 'Violet, Papyrus',
-            baseNotes: 'Leather, Virginia Cedar',
-            longevity: '8-10 Jam'
-        }
-    }
 ];
